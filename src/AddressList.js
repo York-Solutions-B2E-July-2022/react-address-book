@@ -6,9 +6,12 @@ export default function AddressList(props) {
         deleteContact,
     } = props;
 
+    console.log(addressList)
     return <div>
         {addressList.map(
-            (obj, idx) => <Contact key={idx} contact={obj} deleteContact={deleteContact} idx={idx}></Contact>
+            contactData => {
+                return <Contact key={contactData.id} contact={contactData} deleteContact={deleteContact}></Contact>
+            }
         )}
     </div>
 }

@@ -2,12 +2,14 @@ import './App.css';
 import AddressForm from "./AddressForm";
 import AddressList from "./AddressList";
 import {useState} from "react";
+import {v4 as uuid} from 'uuid';
+
 
 // app is the "root" component is it the component that is rendered first
 // all other components are "children" of the app component
 function App() {
 
-    // this is "array destructuring" all that means is that the array that is reutrned from the useState() function
+    // this is "array destructuring" all that means is that the array that is returned from the useState() function
     // is "indexed" and stored into separate variables for us!
     // the array destructing is the same as saying
     /*
@@ -21,15 +23,13 @@ function App() {
         setAddressList(
             [
                 ...addressList,
-                {firstName: firstName, lastName: lastName, email: email}
+                {id: uuid(), firstName, lastName, email}
             ]
         )
     }
 
-    function deleteAddress(deleteIndex) {
-        console.log('delete address')
-        console.log(deleteIndex)
-        const newAddressList = addressList.filter((item, currentIndex) => currentIndex !== deleteIndex)
+    function deleteAddress(id) {
+        const newAddressList = addressList.filter(item => item.id !== id)
         setAddressList(newAddressList);
     }
 
