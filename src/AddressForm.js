@@ -15,7 +15,7 @@ export default function AddressForm(props) {
         // the default action of a form submit is to refresh the page
         // this will prevent the default action (this will stop the page from refreshing)
         event.preventDefault();
-
+        console.log(event)
         // when the form is submitted we want to run the function on the app component to add the address to the screen
         // the function we want to run is stored in the props object under the name "addAddress"
         // so when I call this function here I am actually running a function on my App component

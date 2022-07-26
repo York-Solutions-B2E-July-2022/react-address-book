@@ -1,5 +1,6 @@
 import './App.css';
 import AddressForm from "./AddressForm";
+import AddressList from "./AddressList";
 import {useState} from "react";
 
 // app is the "root" component is it the component that is rendered first
@@ -16,13 +17,20 @@ function App() {
      */
     const [addressList, setAddressList] = useState([]);
 
-    function addAddressToList(fistName, lastName, email) {
+    function addAddressToList(firstName, lastName, email) {
         setAddressList(
             [
                 ...addressList,
-                {fistName: fistName, lastName: lastName, email: email}
+                {firstName: firstName, lastName: lastName, email: email}
             ]
         )
+    }
+
+    function deleteAddress(deleteIndex) {
+        console.log('delete address')
+        console.log(deleteIndex)
+        const newAddressList = addressList.filter((item, currentIndex) => currentIndex !== deleteIndex)
+        setAddressList(newAddressList);
     }
 
     return <div>
@@ -40,13 +48,18 @@ function App() {
             but React cannot render an object. So we are using the js map function to convert the array of objects into an array
             of JSX
         */}
-        {addressList.map(
-            (obj, idx) => <div key={idx}>
-                Name: {obj.firstName} {obj.lastName}
-                <br/>
-                Email: {obj.email}
-            </div>
-        )}
+        {/*{addressList.map(*/}
+        {/*    (obj, idx) => <div key={idx}>*/}
+        {/*        {idx}*/}
+        {/*        <br />*/}
+        {/*        Name: {obj.firstName} {obj.lastName}*/}
+        {/*        <br/>*/}
+        {/*        Email: {obj.email}*/}
+        {/*        <button onClick={() => deleteAddress(idx)}> Delete</button>*/}
+        {/*    </div>*/}
+        {/*)}*/}
+
+        <AddressList addressList={addressList} deleteContact={deleteAddress}></AddressList>
     </div>
 }
 
