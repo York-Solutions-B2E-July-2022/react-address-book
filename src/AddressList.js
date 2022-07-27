@@ -1,4 +1,5 @@
 import Contact from "./Contact";
+import {ListGroup} from "react-bootstrap";
 
 export default function AddressList(props) {
     const {
@@ -7,11 +8,16 @@ export default function AddressList(props) {
     } = props;
 
     console.log(addressList)
-    return <div>
+    return <ListGroup>
         {addressList.map(
             contactData => {
-                return <Contact key={contactData.id} contact={contactData} deleteContact={deleteContact}></Contact>
+                return <ListGroup.Item key={contactData.id}>
+                    <Contact
+                             contact={contactData}
+                             deleteContact={deleteContact}/>
+                </ListGroup.Item>
             }
         )}
-    </div>
+
+    </ListGroup>
 }

@@ -1,3 +1,5 @@
+import {Button, Container, Row, Col} from "react-bootstrap";
+
 export default function Contact(props) {
     console.log(props)
     const {
@@ -5,11 +7,18 @@ export default function Contact(props) {
         deleteContact
     } = props;
 
-    return <div style={{border: "1px solid", margin: "1rem", textAlign: "center"}}>
-        <div>{firstName} {lastName}</div>
-        <div>{email}</div>
-        <button onClick={() => deleteContact(id)} >Delete</button>
-    </div>
+    return <Container className={"border border-dark p-3 bg-primary text-white"}>
+        <Row>
+            <Col xs={8}>
+                <div>{firstName} {lastName}</div>
+                <div>{email}</div>
+            </Col>
+
+            <Col>
+                <Button variant={"danger"} onClick={() => deleteContact(id)} >Delete</Button>
+            </Col>
+        </Row>
+    </Container>
 }
 // <div key={idx}>
 //     {idx}

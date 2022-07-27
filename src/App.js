@@ -3,7 +3,8 @@ import AddressForm from "./AddressForm";
 import AddressList from "./AddressList";
 import {useState} from "react";
 import {v4 as uuid} from 'uuid';
-
+import 'bootstrap/dist/css/bootstrap.css';
+import {Modal} from "react-bootstrap";
 
 // app is the "root" component is it the component that is rendered first
 // all other components are "children" of the app component
@@ -33,7 +34,7 @@ function App() {
         setAddressList(newAddressList);
     }
 
-    return <div>
+    return <div className={"mx-2"}>
         {/*
             We are rendering the "AddressForm" component here and passing a "property" under the name "addAddress"
             Properties are just a way to pass data to a child component

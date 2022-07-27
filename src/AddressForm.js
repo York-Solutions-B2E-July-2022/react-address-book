@@ -1,4 +1,5 @@
 import {useState} from "react";
+import {Button, Form, Modal} from "react-bootstrap";
 
 export default function AddressForm(props) {
 
@@ -8,7 +9,7 @@ export default function AddressForm(props) {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
-
+    const [shown, setShown] = useState(false);
     // this is the function that I want to run when the form submit button is clicked by the user
     // this is my programs "reaction" to the user submitting the form
     function onAddressFormSubmit(event) {
@@ -20,30 +21,49 @@ export default function AddressForm(props) {
         // the function we want to run is stored in the props object under the name "addAddress"
         // so when I call this function here I am actually running a function on my App component
         props.addAddress(firstName, lastName, email)
+        setShown(false);
     }
 
-    return <form onSubmit={onAddressFormSubmit}>
-        <label>
-            Fist Name
-            {/* We are setting the value of the input to whatever value is stored in the state for "firstName"*/}
-            <input type={'text'} value={firstName} onChange={e => setFirstName(e.target.value)}/>
-        </label>
-        <br/>
-        <label>
-            Last Name
-            {/* the "onChange" prop here is setting up a function that will call the set function for the state variable lastName*/}
-            {/* We are updating the state with the new value for the input box */}
-            {/* We are saving the user input in the lastName state */}
-            <input type={'text'} value={lastName} onChange={e => setLastName(e.target.value)}/>
-        </label>
-        <br/>
-        <label>
-            Email
-            <input type={'email'} value={email} onChange={e => setEmail(e.target.value)}/>
-        </label>
+    return (
+        <>
+            <Button onClick={()=>setShown(true)}>Add Contact</Button>
+            <Modal show={shown}>
 
-        {/* If a button is inside a form element its default is to submit the form */}
-        {/* this is why we do not need to add an "onClick" prop */}
-        <button>Submit</button>
-    </form>
+                <Form onSubmit={onAddressFormSubmit}>
+                    <Modal.Body>
+
+                        <Form.Group>
+                            <Form.Label>
+                                First Name
+                                {/* We are setting the value of the input to whatever value is stored in the state for "firstName"*/}
+                            </Form.Label>
+                            <Form.Control required type={'text'} value={firstName} onChange={e => setFirstName(e.target.value)}/>
+
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>
+                                Last Name
+                                {/* the "onChange" prop here is setting up a function that will call the set function for the state variable lastName*/}
+                                {/* We are updating the state with the new value for the input box */}
+                                {/* We are saving the user input in the lastName state */}
+                            </Form.Label>
+                            <Form.Control required type={'text'} value={lastName} onChange={e => setLastName(e.target.value)}/>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>
+                                Email
+                            </Form.Label>
+                            <Form.Control type={'email'} value={email} onChange={e => setEmail(e.target.value)}/>
+                        </Form.Group>
+                    </Modal.Body>
+                    {/* If a button is inside a form element its default is to submit the form */}
+                    {/* this is why we do not need to add an "onClick" prop */}
+                    <Modal.Footer>
+                        <Button type={"submit"}>Submit</Button>
+                        <Button variant={"warning"} onClick={()=>setShown(false)}>Close</Button>
+                    </Modal.Footer>
+                </Form>
+            </Modal>
+        </>
+    )
 }
