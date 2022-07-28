@@ -1,15 +1,20 @@
 import Contact from "./Contact";
-import {ListGroup} from "react-bootstrap";
+import {ListGroup, Form} from "react-bootstrap";
+import {useState} from "react";
 
 export default function AddressList(props) {
     const {
         addressList,
         deleteContact,
     } = props;
-
     console.log(addressList)
+    const [search, setSearch] = useState('');
+    function filterBy(search){
+        setSearch(search);
+    }
     return <ListGroup>
-        {addressList.map(
+        <Form.Control type={"text"} onChange={({target})=>filterBy(target.value)}></Form.Control>
+        {addressList.filter(elem => elem.firstName.toLowerCase().includes(search)).map(
             contactData => {
                 return <ListGroup.Item key={contactData.id}>
                     <Contact
