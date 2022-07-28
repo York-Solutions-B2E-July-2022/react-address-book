@@ -1,8 +1,10 @@
 import {useState} from "react";
 import {Button, Form, Modal} from "react-bootstrap";
+import {useDispatch} from "react-redux";
+import {SUBMIT_ADDRESS} from "../modules/reducer";
 
 export default function AddressForm(props) {
-
+    const dispatch = useDispatch();
     // useState is a function provided by React to allow us to persist data through re-rendering
     // this function returns an array with 2 items [the value, a function to update the value]
     // NEVER change the value directly ONLY ONLY ONLY change the value via the function provided (the set function)
@@ -20,7 +22,8 @@ export default function AddressForm(props) {
         // when the form is submitted we want to run the function on the app component to add the address to the screen
         // the function we want to run is stored in the props object under the name "addAddress"
         // so when I call this function here I am actually running a function on my App component
-        props.addAddress(firstName, lastName, email)
+        //props.addAddress(firstName, lastName, email)
+        dispatch({type: SUBMIT_ADDRESS, data: { firstName, lastName, email}})
         setShown(false);
     }
 
