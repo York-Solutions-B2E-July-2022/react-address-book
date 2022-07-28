@@ -1,11 +1,13 @@
 import './App.css';
-import AddressForm from "./AddressForm";
-import AddressList from "./AddressList";
+import AddressForm from "./components/AddressForm";
+import AddressList from "./components/AddressList";
 import {useState} from "react";
 import {v4 as uuid} from 'uuid';
 import 'bootstrap/dist/css/bootstrap.css';
 import {Modal} from "react-bootstrap";
-
+import reducer from "./modules/reducer";
+import Door from "./components/Door";
+import {useSelector} from "react-redux";
 // app is the "root" component is it the component that is rendered first
 // all other components are "children" of the app component
 function App() {
@@ -18,21 +20,23 @@ function App() {
             const addressList = addressState[0];
             const setAddressList = addressState[1];
      */
-    const [addressList, setAddressList] = useState([]);
+    //const [addressList, setAddressList] = useState([]);
+    const addressList = useSelector(state => {
+        return state.addressList;
+    })
+    //function addAddressToList(firstName, lastName, email) {
+    //    setAddressList(
+    //        [
+    //            ...addressList,
+    //            {id: uuid(), firstName, lastName, email}
+    //        ]
+    //    )
+    //}
 
-    function addAddressToList(firstName, lastName, email) {
-        setAddressList(
-            [
-                ...addressList,
-                {id: uuid(), firstName, lastName, email}
-            ]
-        )
-    }
-
-    function deleteAddress(id) {
-        const newAddressList = addressList.filter(item => item.id !== id)
-        setAddressList(newAddressList);
-    }
+    //function deleteAddress(id) {
+    //    const newAddressList = addressList.filter(item => item.id !== id)
+    //    setAddressList(newAddressList);
+    //}
 
     return <div className={"mx-2"}>
         {/*
@@ -41,7 +45,8 @@ function App() {
                 In this case we are using this property to pass a function (addAddressToList()) to the child it can call
                 that function and have the ability to cause a re-render on its parent component. (in this case the App comp)
         */}
-        <AddressForm addAddress={addAddressToList}></AddressForm>
+        <Door></Door>
+        <AddressForm></AddressForm>
 
         {/*
             We need to render an array of objects, so we can see each piece of address data the user has input
@@ -60,7 +65,7 @@ function App() {
         {/*    </div>*/}
         {/*)}*/}
 
-        <AddressList addressList={addressList} deleteContact={deleteAddress}></AddressList>
+        <AddressList addressList={addressList}></AddressList>
     </div>
 }
 
