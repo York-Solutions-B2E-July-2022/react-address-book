@@ -1,10 +1,12 @@
 import {Button, Container, Row, Col} from "react-bootstrap";
+import {useDispatch} from "react-redux";
+import {DELETE_ADDRESS} from "../modules/reducer";
 
 export default function Contact(props) {
     console.log(props)
+    const dispatch = useDispatch();
     const {
         contact: {id, firstName, lastName, email},
-        deleteContact
     } = props;
 
     return <Container className={"border border-dark p-3 bg-primary text-white"}>
@@ -15,7 +17,7 @@ export default function Contact(props) {
             </Col>
 
             <Col>
-                <Button variant={"danger"} onClick={() => deleteContact(id)} >Delete</Button>
+                <Button variant={"danger"} onClick={() => dispatch({type: DELETE_ADDRESS, data: {id}})} >Delete</Button>
             </Col>
         </Row>
     </Container>

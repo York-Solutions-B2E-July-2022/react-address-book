@@ -1,13 +1,14 @@
 import Contact from "./Contact";
 import {ListGroup, Form} from "react-bootstrap";
 import {useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {DELETE_ADDRESS} from "../modules/reducer";
 
 export default function AddressList(props) {
-    const {
-        addressList,
-        deleteContact,
-    } = props;
-    console.log(addressList)
+    const dispatch = useDispatch();
+    const addressList = useSelector(state => {
+        return state.addressList;
+    })
     const [search, setSearch] = useState('');
     function filterBy(search){
         setSearch(search);
@@ -18,8 +19,8 @@ export default function AddressList(props) {
             contactData => {
                 return <ListGroup.Item key={contactData.id}>
                     <Contact
-                             contact={contactData}
-                             deleteContact={deleteContact}/>
+                             contact={contactData}/>
+
                 </ListGroup.Item>
             }
         )}

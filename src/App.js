@@ -65,7 +65,7 @@ function App() {
         {/*    </div>*/}
         {/*)}*/}
 
-        <AddressList addressList={addressList}></AddressList>
+        <AddressList></AddressList>
     </div>
 }
 

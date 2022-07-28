@@ -1,5 +1,5 @@
 import { useSelector, useDispatch} from "react-redux";
-import {OPEN} from "../modules/reducer"
+import {OPEN, TOGGLE} from "../modules/reducer"
 export default function Door(){
     /*
         useSelector take a function as its argument
@@ -18,7 +18,7 @@ export default function Door(){
     return (
         <>
             <div>Door works {doorState?"OPEN": "CLOSE"}</div>
-            <button onClick={()=>dispatch({type: OPEN})}>Change doors state</button>
+            <button onClick={()=>dispatch({type: TOGGLE})}>Change doors state</button>
         </>
     )
 }
